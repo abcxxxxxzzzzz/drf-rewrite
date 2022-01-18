@@ -31,5 +31,5 @@ nohup python manage.py runserver 127.0.0.1:8080 >>/var/log/python.log 2>&1 &
 
 
 ```python
-nohup python test >/dev/null 2>&1 &
+nohup python redirect.py >/dev/null 2>&1 &
 ```
