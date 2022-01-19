@@ -9,6 +9,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 import re
 from .filter import DmModelFilter
+import xlwt
+from io import BytesIO
 
 class DmModelViewset(viewsets.ModelViewSet):
     """
@@ -39,6 +41,41 @@ class DmModelViewset(viewsets.ModelViewSet):
         else:
             return serializer_class(*args, **kwargs)
 
+    @action(methods=['get'], detail=False)
+    def download(self, request, *args, **kwargs):
+        obj_data = DmModel.objects.all()
+        ws = xlwt.Workbook(encoding='utf-8')
+        st = ws.add_sheet('sheet1')
+        # 写标题行
+        st.write(0, 0, 'ID')
+        st.write(0, 1, '域名')
+        st.write(0, 2, '访问量')
+        st.write(0, 3, '跳转地址')
+        st.write(0, 4, '域名组')
+        st.write(0, 5, '添加时间')
+        # 写入数据，从第一行开始
+        excel_row = 1
+        for obj in obj_data:
+            st.write(excel_row, 0, obj.id)
+            st.write(excel_row, 1, obj.domain)
+            st.write(excel_row, 2, obj.looks)
+            st.write(excel_row, 3, obj.rewrite_url)
+            st.write(excel_row, 4, obj.group.group_name)
+            st.write(excel_row, 5, str(obj.ct_time))
+
+            excel_row += 1
+
+                # 将数据写入io数据流，不用在本地生成excel文件，不然效率就低了
+        output = BytesIO()
+        ws.save(output)
+        output.seek(0)
+        # print(sio.getvalue())
+        response = HttpResponse(output.getvalue(), content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=xx.xls'
+        response.write(output.getvalue())
+
+        return response
+        # return Response({'code': 200})
 
 class DmGroupsModelViewset(viewsets.ModelViewSet):
     """
