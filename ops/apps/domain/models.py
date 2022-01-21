@@ -14,9 +14,9 @@ class DmGroupsModel(models.Model):
 
 
 class DmModel(models.Model):
-    domain          = models.CharField("域名",unique=True, max_length=32, db_index=True, help_text="域名")
+    domain          = models.CharField("域名",unique=True, max_length=125, db_index=True, help_text="域名")
     looks           = models.PositiveIntegerField("访问量",default=0,help_text="访问量")
-    rewrite_url     = models.CharField("跳转地址", max_length=32, help_text="跳转地址") 
+    rewrite_url     = models.CharField("跳转地址", max_length=125, help_text="跳转地址") 
     group           = models.ForeignKey(DmGroupsModel, on_delete=models.CASCADE, verbose_name="所属域名组", related_name="groups",help_text="所属域名组")
     ct_time         = models.DateTimeField("创建时间",auto_now_add=True)
 
