@@ -4,11 +4,13 @@ DIST_DIR=/data
 ```
 
 ```bash
-mkdir ${DIST_DIR}
-tar xf data.tar.gz -C ${DIST_DIR}
-yum install -y  git  lsof python3 python3-devel gcc gcc-c++ git  libnetfilter* libffi-devel
+git clone https://github.com/helmchars/backend-drf-api.git
+mv backend-drf-api/* ${DIST_DIR}/ 
 ```
 
+```bash
+yum install -y  git  lsof python3 python3-devel gcc gcc-c++ git  libnetfilter* libffi-devel
+```
 
 ## 安装四节分流发程序依赖
 ```bash
