@@ -38,6 +38,8 @@ python3 manage.py createsuperuser --username admin --email admin@gmail.com
 ```bash
 python3 -m pip install supervisor
 mkdir /etc/supervisor
+
+cd ${DIST_DIR}
 tar fx supervisor.tar.gz -C /etc/supervisor/
 supervisord -c /etc/supervisor/supervisord.conf
 ```
