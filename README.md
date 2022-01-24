@@ -18,7 +18,7 @@ mv backend-drf-api/* ${DIST_DIR}/
 ## 安装四节分流发程序依赖
 ```bash
 # 已复制，github 地址: https://github.com/Kkevsterrr/geneva
-cd ${DIST_DIR}/ && tar fx geneva.tar.gz
+cd ${DIST_DIR}/ && tar fx geneva.tar.gz && cd geneva
 python3 -m pip install -r requirements.txt
 ```
 
