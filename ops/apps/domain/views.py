@@ -1,6 +1,6 @@
 
 from warnings import filters
-from django.http.response import HttpResponseNotFound
+from django.http.response import HttpResponseNotFound, HttpResponse
 from django.shortcuts import redirect
 from .serializers import DmModelSerializer, DmGroupsModelSerializer
 from .models import DmModel, DmGroupsModel
@@ -11,6 +11,7 @@ import re
 from .filter import DmModelFilter
 import xlwt
 from io import BytesIO
+
 
 class DmModelViewset(viewsets.ModelViewSet):
     """
@@ -121,6 +122,6 @@ def rewrites(request):
         if obj_sh:
             obj = get_object_or_404(DmModel, domain=obj_sh.group())
             obj.increase_looks()
-            return redirect(obj.rewrite_url)
+            return redirect(obj.rewrite_url, permanent=True)
         # return HttpResponseRedirect(reverse(obj.rewrite_url))
     return HttpResponseNotFound()
