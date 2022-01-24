@@ -19,6 +19,7 @@ pyexcel==0.6.7
 pyexcel-io==0.6.5
 pyexcel-webio==0.1.4
 PyJWT==1.7.1
+PyMySQL==1.0.2
 pytz==2021.3
 requests==2.27.1
 sqlparse==0.4.2
