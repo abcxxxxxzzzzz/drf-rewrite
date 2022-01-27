@@ -28,10 +28,10 @@ function check_redirect(){
 
 function main(){
 
-CHECK_IPTABLES=$(iptables -L OUTPUT |grep -i 'tcp spt:http'|wc -l)
 
 while :
 do
+  CHECK_IPTABLES=$(iptables -L OUTPUT |grep -i 'tcp spt:http'|wc -l)
   [ ${CHECK_IPTABLES} == 4 ] || iptables_rule
   check_django || supervisorctl start django
   check_redirect || netstat -tunlp |grep -w "0.0.0.0:80" |awk '{print $NF}' |cut -d '/' -f 1| xargs kill -9; supervisorctl start redirect
